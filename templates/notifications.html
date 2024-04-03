@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ for_url('static', filename='notifications.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Notifications</h1>
+        <div class="notification-list">
+            {% for notification in notifications %}
+            <div class="notification">
+                <p>{{ notification.content }}</p>
+                <small>{{ notification.timestamp }}</small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 100px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.thread-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.thread-content {
+    margin: 0;
+}
+
+.thread-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comments {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-content {
+    margin: 0;
+}
+
+.comment-info {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; /* Sesuaikan lebar popup dengan preferensi Anda */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-popup form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-popup label {
+    font-weight: bold;
+}
+
+/* Pada style.css */
+.comment-popup input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-popup button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.comment-popup button {
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.close-btn {
+    text-decoration: none;
+    font-size: 34px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 10px;
+    
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.close-btn:active {
+    color: #555;
+    transform: scale(0.9);
+    transition: transform 0.1s;
+}

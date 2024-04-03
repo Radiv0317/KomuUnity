@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ thread.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='view-thread.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="{{ url_for('home') }}" class="close-btn">&times;</a>
+            <h2>{{ thread.title }} - {{ thread.user.username }}</h2>
+        </header>
+        <section>
+            <div class="thread-card">
+                <p class="thread-content">{{ thread.content }}</p>
+                {% if thread.image_filename %}
+                <img src="{{ url_for('static', filename='images/' + thread.image_filename) }}" alt="Thread Image" class="card-image" width="auto">
+                {% endif %}
+                <hr>
+                <div class="thread-info">
+                    <p class="thread-date">{{ thread.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                    <p class="thread-comments">{{ thread.comments|length }} Comment(s)</p>
+                </div>
+            </div>
+            <div class="comment-section">
+                <button class="comment-btn" onclick="toggleCommentPopup()">Add Comment</button>
+                <div id="commentPopup" class="comment-popup">
+                    <form method="post" action="{{ url_for('view_thread', thread_id=thread.id) }}">
+                        {{ csrf_token }}
+                        <label for="content">Add Comment:</label>
+                        <input type="text" name="content" required>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+                </div>
+                <div class="comments">
+                    <h3>Comments:</h3>
+                    {% for comment in comments %}
+                    <div class="comment">
+                      <p><strong>{{ comment.user.username }}</strong> ({{ comment.created_at.strftime("%d/%m/%Y %H:%M:%S") }})</p>
+                      <p>{{ comment.content }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleCommentPopup() {
+            const popup = document.getElementById('commentPopup');
+            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        }
+
+          // Fungsi untuk mencegah kembali menggunakan tombol "back"
+        function disableBack() {
+            window.history.forward();
+        }
+        disableBack();
+    
+        // Pemantauan perubahan halaman
+        window.onload = disableBack;
+        window.onpageshow = function(evt) {
+            if (evt.persisted) disableBack();
+        };
+    </script>
+</body>
+</html>

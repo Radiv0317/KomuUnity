@@ -1,0 +1,52 @@
+.navbar{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    border-bottom: 1px solid #ccc; /* Border */
+}
+
+#sidebar {
+    position: fixed;
+    top: 126px;
+    left: 0;
+    height: 100%;
+    width: 120px;
+    padding: 20px;
+    background-color: #ffffff; 
+    z-index: 1000; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    border-bottom: 1px solid #ccc; 
+}
+#sidebar a{
+    color: #555;
+}
+#sidebar .nav-link {
+    padding: 10px 20px;
+}
+#sidebar .flex-column{
+    margin-top: 100px;
+}
+#sidebar .nav-link.active {
+    color: #0008ff; 
+}
+#sidebar .nav-link:hover{
+    color: #000000;
+}
+.dropdown-item.logout-link {
+    color: red; /* Ubah warna teks menjadi merah */
+}
+.search-card{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    border-bottom: 1px solid #ccc;
+}
+
+.input-group {
+    display: flex;
+}
+
+#searchButton {
+    margin-left: auto;
+}
+
+.user-info{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    border-bottom: 1px solid #ccc;
+}

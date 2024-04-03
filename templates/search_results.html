@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .profile-image {
+            width: 50px;
+            height: 50px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center; 
+        }
+        .nama-user a{
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+        .search-input {
+            padding-left: 10px; /* Adjust as needed */
+            border-width: 2px;
+            border-color: #000000; /* Adjust border color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto mt-10">
+        <div class="max-w-xl mx-auto">
+            <a href="{{ url_for('home') }}" class="block mb-4 text-blue-500">&larr; Back to Home</a>
+            <div class="mb-8">
+                <div class="card bg-white shadow-lg rounded-lg p-4">
+                    <div class="flex justify-center">
+                        <input id="searchInput" class="search-input w-100 rounded-l-lg border-black" type="text" placeholder="  Search users">
+                        <button id="searchButton" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+                {% for user in found_users %}
+                    <div class="card bg-white shadow-lg rounded-lg">
+                        <div class="p-4">
+                            <div class="user-info">
+                                {% if user.profile_picture %}
+                                    <img src="{{ url_for('static', filename='images/' + user.profile_picture) }}" alt="Profile Picture" class="profile-picture w-10 object-cover rounded-full">
+                                {% else %}
+                                    <!-- Tampilkan placeholder gambar jika profil tidak memiliki gambar -->
+                                    <img src="{{ url_for('static', filename='images/default_profile_picture.jpg') }}" alt="Default Profile Picture" class="profile-picture w-10 object-cover rounded-full">
+                                {% endif %}
+                                <h5 class="font-semibold text-lg mx-5"><a href="{{ url_for('user_profile', username=user.username) }}">{{ user.username }}</a></h5>
+                            </div>
+                            <!-- Tambahkan informasi profil pengguna lainnya jika diperlukan -->
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menangani pencarian
+        function handleSearch() {
+            var query = document.getElementById("searchInput").value.trim();
+            if (query !== "") {
+                window.location.href = "{{ url_for('search_users') }}?query=" + query;
+            }
+        }
+
+        // Menangani pencarian saat tombol "Search" ditekan
+        document.getElementById("searchButton").addEventListener("click", handleSearch);
+
+        // Menangani pencarian saat tombol "Enter" ditekan
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                handleSearch();
+            }
+        });
+    </script>
+</body>
+</html>

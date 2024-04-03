@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversations</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .close-btn {
+            text-decoration: none;
+            font-size: 34px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 10px;
+            
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .close-btn:active {
+            color: #555;
+            transform: scale(0.9);
+            transition: transform 0.1s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-10 w-[50%]">
+        <h1 class="text-center text-4xl font-bold mb-8">Conversations history</h1>
+        <div class="bg-white rounded-lg shadow-lg">
+            <a href="{{ url_for('home') }}" class="close-btn">&times;</a>
+            <div class="p-4">
+                {% for conversation in conversations %}
+                <div class="border-b border-gray-200 py-4">
+                    <div class="conversation">
+                        {% if conversation.receiver.profile_picture %}
+                            <div class="flex items-center">
+                                <img src="{{ url_for('static', filename='images/' + conversation.receiver.profile_picture) }}" alt="Profile Picture" class="rounded-full w-10 h-10 mr-4">
+                                <a href="{{ url_for('conversation', recipient_id=conversation.receiver.id) }}" class="text-black-500">
+                                    <strong>{{ conversation.receiver.username }}</strong>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="flex items-center">
+                                <img src="{{ url_for('static', filename='images/default_profile_picture.png') }}" alt="Default Profile Picture" class="rounded-full w-10 h-10 mr-4">
+                                <a href="{{ url_for('conversation', recipient_id=conversation.receiver.id) }}" class="text-black-500">
+                                    <strong>{{ conversation.receiver.username }}</strong>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

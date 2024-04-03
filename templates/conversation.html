@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Message</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <div class="flex h-screen">
+        <!-- Area untuk percakapan individual -->
+        <div class="flex-1 flex flex-col">
+            {% block content %}
+            <!-- Header -->
+            <header class="bg-white border-b border-gray-300 p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        {% if recipient.profile_picture %}
+                             <img src="{{ url_for('static', filename='images/' + recipient.profile_picture) }}" alt="Profile Picture" class="rounded-full w-12 h-12">
+                        {% else %}
+                            <!-- Tampilkan placeholder gambar jika profil tidak memiliki gambar -->
+                            <img src="{{ url_for('static', filename='images/default_profile_picture.jpg') }}" alt="Default Profile Picture" class="profile-picture w-20 object-cover rounded-full">
+                        {% endif %}
+                        <span class="font-semibold mx-5">{{ recipient.username }}</span>
+                    </div>
+                    <button class="text-gray-600 hover:text-gray-800">
+                        <a href="{{ url_for('home') }}"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg></a>
+                    </button>
+                </div>
+            </header>
+            <!-- Isi Pesan -->
+            <div class="flex-1 p-4 overflow-y-auto">
+                <div class="flex flex-col space-y-2">
+                    <!-- Loop melalui pesan-pesan -->
+                    {% for message in messages %}
+                    <div class="flex flex-col items-{{ 'end' if message.sender.id == current_user.id else 'start' }}">
+                        {% if message.sender.id == current_user.id %}
+                        <div class="bg-blue-500 text-white rounded-lg p-2 max-w-xs ml-auto">
+                            <p>{{ message.content }}</p>
+                        </div>
+                        {% else %}
+                        <div class="bg-gray-300 text-black rounded-lg p-2 max-w-xs">
+                            <p>{{ message.content }}</p>
+                        </div>
+                        {% endif %}
+                        <!-- Memindahkan elemen timestamp di luar card message -->
+                        <span class="text-sm text-black-300 ml-2 mt-4 mb-4">{{ message.timestamp }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+            <!-- Footer Pesan -->
+            <footer class="bg-white border-t border-gray-300 p-4">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="flex items-center">
+                        {{ form.content(class="flex-1 border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-blue-500") }}
+                        <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Kirim</button>
+                    </div>
+                </form>
+            </footer>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

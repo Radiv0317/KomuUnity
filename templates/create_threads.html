@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Thread</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .close-btn {
+            text-decoration: none;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 10px;
+            
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .close-btn:active {
+            color: #555;
+            transform: scale(0.9);
+            transition: transform 0.1s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <header class="flex justify-between items-center bg-gray-200 px-4 py-2">
+                <h2 class="text-xl font-semibold">Create Thread</h2>
+                <a href="{{ url_for('home') }}" class="text-red-600 close-btn">&times;</a>
+            </header>
+            <form method="post" action="" enctype="multipart/form-data" class="p-4">
+                {{ form.csrf_token }}
+                <div class="mb-4">
+                    {{ form.title.label }} {{ form.title(class="form-input w-full rounded-md border border-gray-300 p-4") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.content.label }} {{ form.content(class="form-input w-full rounded-md border border-gray-300 mx-auto p-5") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.image.label }} {{ form.image(class="form-input w-full rounded-md border border-gray-300") }}
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Create Thread</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

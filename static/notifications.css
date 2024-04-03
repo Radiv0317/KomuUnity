@@ -1,0 +1,17 @@
+.notification-list {
+    margin-top: 20px;
+}
+
+.notification {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.notification small {
+    color: #777;
+    display: block;
+    margin-top: 5px;
+}
