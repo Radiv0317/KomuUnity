@@ -366,4 +366,4 @@ def unhandled_exception(error):
     return render_template('error_pages/500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5000)
