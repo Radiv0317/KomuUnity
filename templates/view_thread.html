@@ -16,9 +16,9 @@
         </header>
         <section>
             <div class="thread-card">
-                <p class="thread-content">{{ thread.content }}</p>
+                <p class="thread-content mb-5">{{ thread.content }}</p>
                 {% if thread.image_filename %}
-                <img src="{{ url_for('static', filename='images/' + thread.image_filename) }}" alt="Thread Image" class="card-image" width="auto">
+                <img src="{{ url_for('static', filename='images/' + thread.image_filename) }}" alt="Thread Image" class="card-image" width="100%">
                 {% endif %}
                 <hr>
                 <div class="thread-info">

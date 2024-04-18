@@ -35,6 +35,7 @@ header {
 
 .thread-content {
     margin: 0;
+    margin-bottom: 50px;
 }
 
 .thread-info {
