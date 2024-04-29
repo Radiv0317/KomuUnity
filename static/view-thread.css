@@ -4,6 +4,7 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    background-color: rgb(75 85 99);
 }
 
 .container {
@@ -11,8 +12,9 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgb(17 24 39);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
 }
 
 header {
@@ -27,7 +29,7 @@ header {
 }
 
 .thread-card {
-    background-color: #f9f9f9;
+    background-color: rgb(17 24 39);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -73,7 +75,7 @@ header {
 }
 
 .comments {
-    background-color: #f9f9f9;
+    background-color: rgb(17 24 39);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -102,16 +104,19 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px; /* Sesuaikan lebar popup dengan preferensi Anda */
-    background-color: #fff;
+    background-color: rgb(17 24 39);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
 }
 
 .comment-popup form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: (17 24 39);
+    color: #fff;
 }
 
 .comment-popup label {
@@ -125,6 +130,8 @@ header {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: rgb(17 24 39);
+    color: #fff;
 }
 
 .comment-popup button {
@@ -149,7 +156,7 @@ header {
 .close-btn {
     text-decoration: none;
     font-size: 34px;
-    color: #333;
+    color: #ffffff;
     cursor: pointer;
     transition: color 0.3s;
     padding: 10px;
@@ -157,7 +164,7 @@ header {
 }
 
 .close-btn:hover {
-    color: #000;
+    color: #a7a7a7;
 }
 
 .close-btn:active {

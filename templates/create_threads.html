@@ -17,7 +17,7 @@
         }
 
         .close-btn:hover {
-            color: #000;
+            color: #adadad;
         }
 
         .close-btn:active {
@@ -27,23 +27,23 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto mt-10">
-        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <header class="flex justify-between items-center bg-gray-200 px-4 py-2">
+<body class="bg-gray-600">
+    <div class="container mx-auto mt-10 text-white">
+        <div class="max-w-md mx-auto bg-gray-900 rounded-lg shadow-md overflow-hidden">
+            <header class="flex justify-between items-center bg-gray-900 px-4 py-2">
                 <h2 class="text-xl font-semibold">Create Thread</h2>
                 <a href="{{ url_for('home') }}" class="text-red-600 close-btn">&times;</a>
             </header>
             <form method="post" action="" enctype="multipart/form-data" class="p-4">
                 {{ form.csrf_token }}
                 <div class="mb-4">
-                    {{ form.title.label }} {{ form.title(class="form-input w-full rounded-md border border-gray-300 p-4") }}
+                    {{ form.title.label }} {{ form.title(class="bg-gray-900 form-input w-full rounded-md border border-gray-300 p-4") }}
                 </div>
                 <div class="mb-4">
-                    {{ form.content.label }} {{ form.content(class="form-input w-full rounded-md border border-gray-300 mx-auto p-5") }}
+                    {{ form.content.label }} {{ form.content(class="bg-gray-900 form-input w-full rounded-md border border-gray-300 mx-auto p-5") }}
                 </div>
                 <div class="mb-4">
-                    {{ form.image.label }} {{ form.image(class="form-input w-full rounded-md border border-gray-300") }}
+                    {{ form.image.label }} {{ form.image(class="bg-gray-900 form-input w-full rounded-md border border-gray-300") }}
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Create Thread</button>
             </form>

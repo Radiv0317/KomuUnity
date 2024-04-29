@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, jsonify, render_template, request, redirect, session, url_for, flash
+from flask import Flask, abort, jsonify, render_template, request, redirect, session, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -31,9 +31,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(120), nullable=False)
     profile_picture = db.Column(db.String(100))
-    bio = db.Column(db.Text)  # Tambah kolom bio
-    twitter_username = db.Column(db.String(50))  # Tambah kolom username Twitter
-    facebook_username = db.Column(db.String(50))  # Tambah kolom username Facebook
+    bio = db.Column(db.Text) 
+    twitter_username = db.Column(db.String(50)) 
+    facebook_username = db.Column(db.String(50))  
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -69,7 +69,7 @@ class Message(db.Model):
 
 
 class MessageForm(FlaskForm):
-    content = StringField('Message', validators=[DataRequired()])  # Mengubah TextAreaField menjadi StringField
+    content = StringField('Message', validators=[DataRequired()]) 
     submit = SubmitField('Send')
 
 class ThreadForm(FlaskForm):
@@ -90,9 +90,9 @@ class Comment(db.Model):
 class UserProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     profile_picture = FileField('Profile Picture')
-    bio = TextAreaField('Bio')  # Tambah bidang bio
-    twitter_username = StringField('Twitter Username')  # Tambah bidang username Twitter
-    facebook_username = StringField('Facebook Username')  # Tambah bidang username Facebook
+    bio = TextAreaField('Bio')  
+    twitter_username = StringField('Twitter Username')  
+    facebook_username = StringField('Facebook Username') 
 
 
 class Friendship(db.Model):
@@ -167,7 +167,7 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
+    if request.method == 'POST': #request metode register
         username = request.form['username']
         password = request.form['password']
 
@@ -185,7 +185,6 @@ def register():
             return render_template('register.html', error=error)
 
     return render_template('register.html')
-
 
 @app.route('/thread/<int:thread_id>', methods=['GET', 'POST'])
 @login_required
@@ -211,14 +210,13 @@ def view_thread(thread_id):
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    # Ambil informasi terbaru tentang pengguna dari database
     user_threads = Thread.query.filter_by(user=current_user).order_by(Thread.created_at.desc()).all()
 
     num_friends = Friendship.query.filter(
         (Friendship.user_id1 == current_user.id) | (Friendship.user_id2 == current_user.id)
     ).count()
 
-    # Perbarui informasi pengguna jika ada data yang diubah
+
     form = UserProfileForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -242,14 +240,16 @@ def profile():
 def delete_thread(thread_id):
     thread = Thread.query.get_or_404(thread_id)
 
-    if current_user != thread.user:
+    if current_user.id != thread.user_id:
         flash('You do not have permission to delete this thread.', 'danger')
         return redirect(url_for('view_thread', thread_id=thread.id))
 
+    # Delete all comments associated with the thread before deleting the thread
+    Comment.query.filter_by(thread_id=thread.id).delete()
     db.session.delete(thread)
     db.session.commit()
 
-    flash('Thread deleted successfully!', 'success')
+    flash('Thread and all associated comments deleted successfully!', 'success')
     return redirect(url_for('home'))
 
 @app.route('/search_users', methods=['GET'])
@@ -301,19 +301,16 @@ def conversation(recipient_id):
 @app.route('/conversations')
 @login_required
 def conversations():
-    # Mendapatkan daftar percakapan yang melibatkan pengguna saat ini
     conversations = Message.query.filter_by(sender_id=current_user.id).distinct(Message.receiver_id).all()
     return render_template('conversations.html', conversations=conversations)
 
 
 
-# Route to add friend
 @app.route('/add_friend/<int:friend_id>', methods=['POST'])
 @login_required
 def add_friend_route(friend_id):
     friend = User.query.get_or_404(friend_id)
 
-    # Check if the user is already friends with the given friend
     existing_friendship = Friendship.query.filter(
         or_(
             (Friendship.user_id1 == current_user.id) & (Friendship.user_id2 == friend_id),
@@ -349,7 +346,42 @@ def update_profile():
         return redirect(url_for('profile'))
     return render_template('update_profile.html', form=form)
 
+@app.route('/edit_thread/<int:thread_id>', methods=['GET', 'POST'])
+@login_required
+def edit_thread_route(thread_id):
+    thread = Thread.query.get_or_404(thread_id)
+    if thread.user_id != current_user.id:
+        flash('You do not have permission to edit this thread.', 'danger')
+        return redirect(url_for('index'))
 
+    form = ThreadForm()
+    if form.validate_on_submit():
+        thread.title = form.title.data
+        thread.content = form.content.data
+        # Check if 'image' attribute exists in the Thread model before attempting to access it
+        if hasattr(thread, 'image') and form.image.data:
+            image_file = form.image.data
+            image_filename = secure_filename(image_file.filename)
+            image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_filename))
+            thread.image = image_filename
+        db.session.commit()
+        flash('Thread updated successfully.', 'success')
+        return redirect(url_for('view_thread', thread_id=thread.id))
+
+    form.title.data = thread.title
+    form.content.data = thread.content
+    # Check if 'image' attribute exists in the Thread model before attempting to access it
+    if hasattr(thread, 'image') and thread.image:
+        form.image.data = url_for('static', filename='upload_folder/' + thread.image)
+    return render_template('edit_thread.html', form=form, thread_id=thread_id)
+
+@app.route('/suggest_users')
+@login_required
+def suggest_users():
+    if request.endpoint == 'profile' or request.endpoint == 'update_profile':
+        suggested_users = User.query.filter(User.id != current_user.id).limit(5).all()
+        return render_template('suggest_users.html', suggested_users=suggested_users)
+    abort(404)
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('error_pages/404.html'), 404
@@ -357,13 +389,14 @@ def not_found_error(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-    db.session.rollback()  # Mengembalikan sesi database ke keadaan awal
+    db.session.rollback()  
     return render_template('error_pages/500.html'), 500
 
-# Menangani kesalahan umum lainnya
 @app.errorhandler(Exception)
 def unhandled_exception(error):
     return render_template('error_pages/500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+

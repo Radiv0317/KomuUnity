@@ -22,22 +22,22 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-gray-600 font-sans antialiased">
 
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-lg">
+  <nav class="bg-gray-900 shadow-lg">
     <div class="container mx-auto px-4 flex justify-between items-center py-4">
         <!-- Logo -->
         <a href="#" class="navbar-brand px-10">
-            <img src="{{ url_for('static', filename='images/KOMUUNITY.png') }}" alt="KOMUUNITY" width="100">
+            <img src="{{ url_for('static', filename='images/KOMUUNITY3.png') }}" alt="KOMUUNITY" width="100">
         </a>
     </div>
   </nav>
 
 
   <div class="container mx-auto px-4 py-8">
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-gray-900 rounded-lg shadow overflow-hidden text-white">
       <div class="p-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center">
@@ -62,20 +62,20 @@
              
         </div>
         <div class="mt-4">
-          <p class="text-gray-700 leading-7">{{ user.bio }}.</p>
+          <p class="leading-7">{{ user.bio }}.</p>
           <p class="mt-4 mb-5">Friends {{ num_friends }}</p>
           <a href="{{ url_for('conversation', recipient_id=user.id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Chat</a>
         </div>
         <div class="mt-6">
           <h2 class="text-lg font-semibold">Sosial Media</h2>
           <ul class="mt-2">
-            <li class="flex items-center text-gray-700">
+            <li class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 2a8 8 0 0 0-8 8c0 4.42 3.58 8 8 8s8-3.58 8-8a8 8 0 0 0-8-8zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm-1.53-6.41h.01c.46-.03.95-.07 1.47-.13.52-.06.98-.14 1.38-.24.4-.11.74-.25 1.02-.42.28-.17.51-.38.7-.63.19-.25.33-.55.43-.9.1-.35.16-.74.16-1.17v-.75c0-.49-.08-.91-.23-1.26a2.55 2.55 0 0 0-.62-.9 2.73 2.73 0 0 0-1.02-.59 3.43 3.43 0 0 0-1.39-.28c-.47 0-.89.08-1.26.24a2.56 2.56 0 0 0-.87.63 3.07 3.07 0 0 0-.57.9 3.92 3.92 0 0 0-.2 1.29v.39H5.53V12h1.94v-.75c0-.31.04-.61.13-.9.09-.29.24-.54.45-.75.21-.2.48-.35.8-.45.32-.1.69-.15 1.1-.15.33 0 .64.05.91.16.28.11.53.26.74.45.21.19.38.42.51.7.13.29.2.62.2.99v.71c0 .58-.07 1.06-.2 1.44a3.27 3.27 0 0 1-.54 1 3 3 0 0 1-.87.73 3.3 3.3 0 0 1-1.18.33 4.5 4.5 0 0 1-1.6-.28 4.46 4.46 0 0 1-1.33-.8v1.47c.39.26.83.49 1.32.68a4.56 4.56 0 0 0 1.67.3 4.35 4.35 0 0 0 1.55-.28 3.57 3.57 0 0 0 1.23-.78c.37-.35.66-.78.89-1.29.24-.5.36-1.07.36-1.7v-.73c0-.35-.06-.68-.19-.99a3.32 3.32 0 0 0-.52-.93 3.26 3.26 0 0 0-.86-.68 3.85 3.85 0 0 0-1.22-.32 7.33 7.33 0 0 0-1.47.13c-.47.05-.92.11-1.35.18a5.28 5.28 0 0 0-1.3.38c-.39.19-.73.44-1.01.76a2.67 2.67 0 0 0-.67 1.13 8.9 8.9 0 0 0-.25 2.2v.39zm3.47 1.32v-1.33c0-.22-.02-.43-.06-.65a2.23 2.23 0 0 0-.17-.57 1.48 1.48 0 0 0-.31-.48 1.4 1.4 0 0 0-.47-.31c-.19-.08-.4-.12-.63-.12a1.14 1.14 0 0 0-.75.27 1.33 1.33 0 0 0-.45.73 5.5 5.5 0 0 0-.05.7v1.06c0 .24.02.46.07.67a2.3 2.3 0 0 0 .21.55 1.35 1.35 0 0 0 .31.47c.15.12.33.21.55.28.22.07.47.11.76.11.24 0 .46-.03.67-.08.22-.05.42-.12.59-.21a2.26 2.26 0 0 0 .49-.31 1.37 1.37 0 0 0 .38-.49c.1-.2.18-.43.23-.7.05-.27.08-.55.08-.85zM6.2 7.9c.47 0 .86-.13 1.16-.38a1.66 1.66 0 0 0 .43-.63c.09-.24.14-.5.14-.79 0-.55-.18-1.01-.54-1.36a1.8 1.8 0 0 0-1.33-.54c-.47 0-.86.13-1.16.38A1.63 1.63 0 0 0 5 6.11c-.1.24-.14.5-.14.78 0 .55.18 1.01.54 1.36.35.35.8.53 1.35.53z"/>
               </svg>
               <span>Twitter: {{ user.twitter_username }}</span>
             </li>
-            <li class="flex items-center text-gray-700 mt-2">
+            <li class="flex items-center mt-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 2a8 8 0 0 0-8 8c0 4.42 3.58 8 8 8s8-3.58 8-8a8 8 0 0 0-8-8zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm-1.53-6.41h.01c.46-.03.95-.07 1.47-.13.52-.06.98-.14 1.38-.24.4-.11.74-.25 1.02-.42.28-.17.51-.38.7-.63.19-.25.33-.55.43-.9.1-.35.16-.74.16-1.17v-.75c0-.49-.08-.91-.23-1.26a2.55 2.55 0 0 0-.62-.9 2.73 2.73 0 0 0-1.02-.59 3.43 3.43 0 0 0-1.39-.28c-.47 0-.89.08-1.26.24a2.56 2.56 0 0 0-.87.63 3.07 3.07 0 0 0-.57.9 3.92 3.92 0 0 0-.2 1.29v.39H5.53V12h1.94v-.75c0-.31.04-.61.13-.9.09-.29.24-.54.45-.75.21-.2.48-.35.8-.45.32-.1.69-.15 1.1-.15.33 0 .64.05.91.16.28.11.53.26.74.45.21.19.38.42.51.7.13.29.2.62.2.99v.71c0 .58-.07 1.06-.2 1.44a3.27 3.27 0 0 1-.54 1 3 3 0 0 1-.87.73 3.3 3.3 0 0 1-1.18.33 4.5 4.5 0 0 1-1.6-.28 4.46 4.46 0 0 1-1.33-.8v1.47c.39.26.83.49 1.32.68a4.56 4.56 0 0 0 1.67.3 4.35 4.35 0 0 0 1.55-.28 3.57 3.57 0 0 0 1.23-.78c.37-.35.66-.78.89-1.29.24-.5.36-1.07.36-1.7v-.73c0-.35-.06-.68-.19-.99a3.32 3.32 0 0 0-.52-.93 3.26 3.26 0 0 0-.86-.68 3.85 3.85 0 0 0-1.22-.32 7.33 7.33 0 0 0-1.47.13c-.47.05-.92.11-1.35.18a5.28 5.28 0 0 0-1.3.38c-.39.19-.73.44-1.01.76a2.67 2.67 0 0 0-.67 1.13 8.9 8.9 0 0 0-.25 2.2v.39zm3.47 1.32v-1.33c0-.22-.02-.43-.06-.65a2.23 2.23 0 0 0-.17-.57 1.48 1.48 0 0 0-.31-.48 1.4 1.4 0 0 0-.47-.31c-.19-.08-.4-.12-.63-.12a1.14 1.14 0 0 0-.75.27 1.33 1.33 0 0 0-.45.73 5.5 5.5 0 0 0-.05.7v1.06c0 .24.02.46.07.67a2.3 2.3 0 0 0 .21.55 1.35 1.35 0 0 0 .31.47c.15.12.33.21.55.28.22.07.47.11.76.11.24 0 .46-.03.67-.08.22-.05.42-.12.59-.21a2.26 2.26 0 0 0 .49-.31 1.37 1.37 0 0 0 .38-.49c.1-.2.18-.43.23-.7.05-.27.08-.55.08-.85zM6.2 7.9c.47 0 .86-.13 1.16-.38a1.66 1.66 0 0 0 .43-.63c.09-.24.14-.5.14-.79 0-.55-.18-1.01-.54-1.36a1.8 1.8 0 0 0-1.33-.54c-.47 0-.86.13-1.16.38A1.63 1.63 0 0 0 5 6.11c-.1.24-.14.5-.14.78 0 .55.18 1.01.54 1.36.35.35.8.53 1.35.53z"/>
               </svg>
@@ -88,10 +88,10 @@
     </div>
 
     <div class="container mx-auto px-4 py-8 flex justify-center">
-        <div class="w-64 bg-white p-4 mt-5 max-h-[20rem] shadow-lg rounded">
+        <div class="w-64 bg-gray-900 p-4 mt-5 max-h-[20rem] shadow-lg rounded text-white">
             <div class="overflow-y-auto">
                 <h2 class="text-lg font-semibold mb-4">Suggested to Follow</h2>
-                <ul class="text-sm text-gray-600">
+                <ul class="text-sm">
                     <li class="mb-2">
                         <div class="flex items-center">
                             <img src="gambar_profil_1.jpg" alt="Profil Image" class="w-8 h-8 rounded-full mr-2">
@@ -109,27 +109,27 @@
             </div>
         </div>
 
-        <div class="post-container flex-grow">
+        <div class="post-container flex-grow text-white">
             <div class="post-container-content">
                 <!-- Tambahkan kelas untuk mengelompokkan postingan -->
                 {% for thread in user.threads %}
-                <div class="bg-white rounded-lg shadow-md p-6 mb-4">
+                <div class="bg-gray-900 rounded-lg shadow-md p-6 mb-4">
                     <!-- Ganti kelas penuh dengan padding dan bayangan -->
-                    <h3 class="text-xl font-semibold mb-4">{{ thread.title }}</h3>
-                    <p class="text-gray-600">{{ thread.content }}</p>
+                    <h3 class="text-xl font-semibold mb-5">{{ thread.title }}</h3>
+                    <p class="mb-5">{{ thread.content }}</p>
                     {% if thread.image_filename %}
-                    <div class="w-full flex justify-center mt-4">
+                    <div class="w-full flex justify-center mt-5">
                         <img src="{{ url_for('static', filename='images/' + thread.image_filename) }}" alt="Thread Image">
                     </div>
                     {% endif %}
                     <div class="flex justify-between items-center mt-4">
                         <p class="text-gray-500 text-sm">{{ thread.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
                         <div class="justify-end flex gap-3">
-                            <a href="{{ url_for('view_thread', thread_id=thread.id) }}" class="text-blue-500 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">View Thread</a>
+                            <a href="{{ url_for('view_thread', thread_id=thread.id) }}" class="text-white font-semibold py-2 px-4">View Thread</a>
                             {% if current_user == thread.user %}
                             <form method="post" action="{{ url_for('delete_thread', thread_id=thread.id) }}">
                                 {{ csrf_token }}
-                                <button type="submit" class="text-red-500 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onclick="return confirm('Are you sure you want to delete this thread?')">Delete Thread</button>
+                                <button type="submit" class="text-red-500 py-2 px-4" onclick="return confirm('Are you sure you want to delete this thread?')">Delete Thread</button>
                             </form>
                             {% endif %}
                         </div>
@@ -139,18 +139,26 @@
             </div>
         </div>
         <!-- Sidebar Navigation -->
-        <div class="sidebar bg-white p-9 mt-5 rounded mx-auto max-h-[20rem] overflow-y-auto shadow-lg">
+        <div class="sidebar bg-gray-900 p-9 mt-5 rounded mx-auto max-h-[20rem] overflow-y-auto shadow-lg text-white">
             <ul class="menu">
-                <li><a href="/" class="block py-2 px-4 text-gray-800 hover:bg-gray-200">Home</a></li>
-                <li><a href="{{ url_for('create_threads') }}" class="block py-2 px-4 text-gray-800 hover:bg-gray-200">Create Threads</a></li>
-                <li><a href="{{ url_for('search_users') }}" class="block py-2 px-4 text-gray-800 hover:bg-gray-200">Search Users</a></li>
-                <li><a href="{{ url_for('logout') }}" class="block py-2 px-4 text-red-900 hover:bg-gray-200">Logout</a></li>
+                <li><a href="/" class="block py-2 px-4">Home</a></li>
+                <li><a href="{{ url_for('create_threads') }}" class="block py-2 px-4">Create Threads</a></li>
+                <li><a href="{{ url_for('search_users') }}" class="block py-2 px-4">Search Users</a></li>
+                <li><a href="{{ url_for('logout') }}" class="block py-2 px-4 text-red-900">Logout</a></li>
             </ul>
         </div>
         
     </div>
 
   </div>
-
+<script>
+  document.addEventListener('contextmenu', function(e) {
+        var clickedElement = e.target;
+        if (clickedElement.tagName === 'IMG') {
+            e.preventDefault();
+            alert('Downloading images is not allowed.');
+        }
+    });
+</script>
 </body>
 </html>

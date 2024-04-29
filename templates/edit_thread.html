@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Thread</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-600 flex flex-col justify-center items-center min-h-screen">
+    <div class="w-96"> <!-- Menambahkan kelas untuk mengatur lebar kartu -->
+        
+        <h2 class="text-2xl font-semibold mb-4 text-center text-white">Edit Thread</h2>
+        <form method="POST" enctype="multipart/form-data" class="bg-gray-900 text-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-[10%]">
+            
+            {{ form.hidden_tag() }}
+            <fieldset class="max-w-sm mx-auto"> <!-- Updated width to max-w-sm -->
+                <legend class="text-xl font-bold mb-2 text-white">Edit Thread</legend>
+                <div class="mb-4">
+                    <label for="title" class="block text-white text-sm font-bold mb-2">Title</label>
+                    {{ form.title(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", id="title") }}
+                    {% if form.title.errors %}
+                        {% for error in form.title.errors %}
+                            <p class="text-red-500 text-xs italic">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="mb-6">
+                    <label for="content" class="block text-white text-sm font-bold mb-2">Content</label>
+                    {{ form.content(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline", id="content") }}
+                    {% if form.content.errors %}
+                        {% for error in form.content.errors %}
+                            <p class="text-red-500 text-xs italic">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <button type="submit" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Thread</button>
+                <a href="{{ url_for('home') }}" class="text-red-600 close-btn font-bold" style="font-size: 15px; text-align: right; margin-left: 10px;">Back To Home</a>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
